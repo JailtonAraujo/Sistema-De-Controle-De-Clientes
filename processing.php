@@ -2,23 +2,22 @@
 require 'connection.php';
 
 $acao = $_GET['acao'];
-$id = $_POST['id'];
-
-$nome = $_POST['nome'];
-$cpf = $_POST['cpf'];
-$rg = $_POST['rg'];
-$dataNascimento = $_POST['data-nascimento'];
-$cep = $_POST['cep'];
-$logradouro = $_POST['logradouro'];
-$complemento = $_POST['complemento'];
-$bairro = $_POST['bairro'];
-$cidade = $_POST['cidade'];
-$numero = $_POST['numero'];
-$uf = $_POST['uf'];
-
-$_SESSION['message'] = '';
 
 if($acao === 'salvar'){
+
+    $id = $_POST['id'];
+    $nome = $_POST['nome'];
+    $cpf = $_POST['cpf'];
+    $rg = $_POST['rg'];
+    $dataNascimento = $_POST['data-nascimento'];
+    $cep = $_POST['cep'];
+    $logradouro = $_POST['logradouro'];
+    $complemento = $_POST['complemento'];
+    $bairro = $_POST['bairro'];
+    $cidade = $_POST['cidade'];
+    $numero = $_POST['numero'];
+    $uf = $_POST['uf'];
+
 $queryCliente = "insert into cliente (nome, cpf, rg, dataNascimento) values ('$nome', '$cpf', '$rg', '$dataNascimento')";
 
 try{
@@ -43,5 +42,11 @@ try{
 header('Location:pageCadastro.php');
 }
 
+
+else if($acao === 'buscarFetch'){
+    $buscar = $_GET['buscar'];
+
+    
+}
 
 ?>

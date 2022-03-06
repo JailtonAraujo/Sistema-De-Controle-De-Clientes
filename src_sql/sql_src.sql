@@ -28,7 +28,7 @@ create table if not exists `cliente`(
 -- TABLE ENDERECO --
 create table if not exists `endereco`(
     idEndereco int not null auto_increment,
-    idCliente int not null auto_increment,
+    idCliente int not null,
     cep int (8) not null,
     logradouro varchar(60) not null,
     complemento varchar(40) not null,
@@ -41,7 +41,7 @@ create table if not exists `endereco`(
 )engine = InnoDB default character set = utf8;
 
 -- QUERY DE INSERT NO BANCO --
-insert into usuario (nome, login, senha, email) values ('?', '?', '?', '?');
+insert into usuario (login, senha) values ('?', '?');
 
 --  QUERY DE CONSULTA NO BANCO --
 select * from usuario;
