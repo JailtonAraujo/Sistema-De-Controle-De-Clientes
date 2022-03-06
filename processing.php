@@ -46,7 +46,26 @@ header('Location:pageCadastro.php');
 else if($acao === 'buscarFetch'){
     $buscar = $_GET['buscar'];
 
+    try{
+    $sql = "select cliente.idCliente, cliente.nome, cliente.cpf, endereco.logradouro, endereco.cidade 
+    from cliente
+    inner join endereco on endereco.idCliente = cliente.idCliente
+    where cliente.nome  like '%';";
+
+    $result = mysqli_query($conexao, $sql);
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
     
+    echo json_encode($rows);
+    mysqli_commit($conexao);
+
+
+    }catch(Exception $e){
+        echo $e;
+        mysqli_rollback($conexao);
+    }finally{
+        mysqli_close($conexao);
+    }
+
 }
 
 ?>

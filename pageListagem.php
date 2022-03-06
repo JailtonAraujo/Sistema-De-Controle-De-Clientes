@@ -36,7 +36,7 @@ if(!$_SESSION['usuario']){
           <button class="btn btn-primary" type="button" id="btn-busca">BUSCAR</button>
         </div>
         <div class="tblresults" style="height: 70%; overflow:scroll;">
-          <table class="table" id="tblResultados">
+          <table class="table table-striped" id="tblResults">
             <thead>
               <tr>
                 <th scope="col">ID</th>
@@ -44,9 +44,10 @@ if(!$_SESSION['usuario']){
                 <th scope="col">CPF</th>
                 <th scope="col">LOGRADOURO</th>
                 <th scope="col">CIDADE:</th>
+                <th scope="col">AÇÕES:</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="tbody">
             </tbody>
           </table>
         </div>
