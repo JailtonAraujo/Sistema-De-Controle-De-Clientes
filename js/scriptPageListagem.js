@@ -70,7 +70,7 @@ btnBuscar.addEventListener('click',e=>{
 
                 let Ancor = document.createElement('a');
                 Ancor.classList.add('page-link');
-                Ancor.onclick ="buscarClientePaginado(sasa);";
+                Ancor.setAttribute("onclick","buscarClientePaginado(\""+url+"\")");
                 Ancor.href ='#';
                 Ancor.textContent = (i+1); 
                 let li = document.createElement('li');
