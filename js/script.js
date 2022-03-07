@@ -59,15 +59,3 @@ function limparCampos(){
     }
 
 }
-
-function paginar(total){
-    
-    totalPagina = (total/5);
-    
-    if(totalPagina>1 && totalPagina % 2 >0){
-        totalPagina++;
-    }
-
-
-    return parseInt(totalPagina);
-}

@@ -23,7 +23,7 @@ btnBuscar.addEventListener('click',e=>{
             tbody.textContent = '';
 
             console.log(data);
-            for(let i = 0;i<data.length;i++){
+            for(let i = 0;i<(data.length-1);i++){
                 let tr = tbody.insertRow();
 
                 let td_id = tr.insertCell();
@@ -55,8 +55,47 @@ btnBuscar.addEventListener('click',e=>{
                 td_acoes.appendChild(ancorEdit);
                 
             }
-            document.querySelector('#cont').textContent = `Resultados: ${data.length}`;
+            document.querySelector('#cont').textContent = `Resultados: ${(data.length-1)}`;
+
+            let ul = document.querySelector('#ulPaginado');
+            ul.textContent = '';
+
+            console.log(data[(data.length-1)].total);
+            let paginas = paginar(data[(data.length-1)].total);
+            console.log(paginas);
+            let url;
+            for(let i = 0;i<paginas;i++){
+
+                url = `processing.php?acao=buscarClientePaginado&buscar=${busca}&offset=${(i*5)}`;
+
+                let Ancor = document.createElement('a');
+                Ancor.classList.add('page-link');
+                Ancor.onclick ="buscarClientePaginado(sasa);";
+                Ancor.href ='#';
+                Ancor.textContent = (i+1); 
+                let li = document.createElement('li');
+                li.classList.add('page-item');
+                li.appendChild(Ancor);
+                ul.appendChild(li);
+
+            }
         })
     })
 
 })
+
+function paginar(total){
+    
+    totalPagina = (total/5);
+    
+    if(totalPagina>1 && totalPagina % 2 >0){
+        totalPagina++;
+    }
+
+
+    return parseInt(totalPagina);
+}
+
+function buscarClientePaginado(url){
+    alert(url);
+}
