@@ -1,7 +1,22 @@
 <?php
 require 'connection.php';
 
-$acao = $_GET['acao'];
+    $id = '88';
+    $nome = '';
+    $cpf = '';
+    $rg = '';
+    $dataNascimento = '';
+    $cep = '';
+    $logradouro = '';
+    $complemento = '';
+    $bairro = '';
+    $cidade = '';
+    $numero = '';
+    $uf = '';
+
+if( isset($_GET['acao'])){
+    $acao = $_GET['acao'];
+
 $offset = 0;
 
 if($acao === 'salvar'){
@@ -72,6 +87,35 @@ else if($acao === 'buscarFetch'){
         mysqli_close($conexao);
     }
 
+}else if($acao==='buscarClientePaginado'){
+    $buscar = $_GET['buscar'];
+    $offset = $_GET['offset'];   
+    try{
+    $sql = "select cliente.idCliente, cliente.nome, cliente.cpf, endereco.logradouro, endereco.cidade 
+    from cliente
+    inner join endereco on endereco.idCliente = cliente.idCliente
+    where cliente.nome  like '$buscar%' limit 5 offset $offset;";
+
+    $sqlCount = "select count(*) as total from cliente where nome like upper('%')";
+
+    $result = mysqli_query($conexao, $sql);
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
+
+    $resultCount = mysqli_query($conexao, $sqlCount);
+    $total = $resultCount->fetch_all(MYSQLI_ASSOC);
+    array_push($rows,$total[0]);
+    
+    echo json_encode($rows);
+    mysqli_commit($conexao);
+
+
+    }catch(Exception $e){
+        echo $e;
+        mysqli_rollback($conexao);
+    }finally{
+        mysqli_close($conexao);
+    }
+}
 }
 
 ?>

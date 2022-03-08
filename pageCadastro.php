@@ -24,7 +24,9 @@ if(!$_SESSION['usuario']){
 
   <div class="container">
 
-    <?php  include 'header.php'?>
+    <?php  include 'header.php';
+           include 'processing.php';
+    ?>
     <div class="main">
       <h2>CADASTRO DE CLIENTES</h2>
 
@@ -36,7 +38,7 @@ if(!$_SESSION['usuario']){
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">ID:</span>
                 <input type="text" name="id" class="form-control" id="id" aria-label="Username"
-                  aria-describedby="basic-addon1" readonly>
+                  aria-describedby="basic-addon1" value="<?= $id?>" readonly>
                 <div class="invalid-feedback">
                   Campo Obrigatorio!!
                 </div>

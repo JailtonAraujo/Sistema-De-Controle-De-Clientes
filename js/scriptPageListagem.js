@@ -22,7 +22,6 @@ btnBuscar.addEventListener('click',e=>{
             let tbody = document.querySelector('#tbody');
             tbody.textContent = '';
 
-            console.log(data);
             for(let i = 0;i<(data.length-1);i++){
                 let tr = tbody.insertRow();
 
@@ -36,14 +35,14 @@ btnBuscar.addEventListener('click',e=>{
                 let imgDel = document.createElement('img');
                 imgDel.src = 'img/lixeira.png';
                 let ancorDel = document.createElement('a');
-                ancorDel.href = '#';
+                ancorDel.href = `processing.php?acao=delCliente&id=${data[i].idCliente}`;
                 ancorDel.style = 'margin-right: 3px;';
                 ancorDel.appendChild(imgDel);
 
                 let imgEdit = document.createElement('img');
                 imgEdit.src = 'img/lapis.png';
                 let ancorEdit = document.createElement('a');
-                ancorEdit.href = '#';
+                ancorEdit.href = `processing.php?acao=buscarClienteId&id=${data[i].idCliente}`;
                 ancorEdit.appendChild(imgEdit);
 
                 td_id.textContent = data[i].idCliente;
@@ -55,7 +54,7 @@ btnBuscar.addEventListener('click',e=>{
                 td_acoes.appendChild(ancorEdit);
                 
             }
-            document.querySelector('#cont').textContent = `Resultados: ${(data.length-1)}`;
+            document.querySelector('#cont').textContent = `Resultados: ${(data[(data.length-1)].total)}`;
 
             let ul = document.querySelector('#ulPaginado');
             ul.textContent = '';
@@ -97,5 +96,76 @@ function paginar(total){
 }
 
 function buscarClientePaginado(url){
-    alert(url);
+
+    let busca = document.querySelector('#txt-busca').value;
+
+    const options ={
+        method:'GET',
+        Headers:{"Content-Type":'application/json'},
+    }
+
+    fetch(url,options)
+    .then(response =>{response.json()
+        .then(function(data){
+            let tbody = document.querySelector('#tbody');
+            tbody.textContent = '';
+
+            console.log(data);
+            for(let i = 0;i<(data.length-1);i++){
+                let tr = tbody.insertRow();
+
+                let td_id = tr.insertCell();
+                let td_nome = tr.insertCell();
+                let td_cpf = tr.insertCell();
+                let td_logradouro = tr.insertCell();
+                let td_cidade = tr.insertCell();
+                let td_acoes = tr.insertCell();
+
+                let imgDel = document.createElement('img');
+                imgDel.src = 'img/lixeira.png';
+                let ancorDel = document.createElement('a');
+                ancorDel.href = `processing.php?acao=delCliente&id=${data[i].idCliente}`;
+                ancorDel.style = 'margin-right: 3px;';
+                ancorDel.appendChild(imgDel);
+
+                let imgEdit = document.createElement('img');
+                imgEdit.src = 'img/lapis.png';
+                let ancorEdit = document.createElement('a');
+                ancorEdit.href = `processing.php?acao=buscarClienteId&id=${data[i].idCliente}`;
+                ancorEdit.appendChild(imgEdit);
+
+                td_id.textContent = data[i].idCliente;
+                td_nome.textContent = data[i].nome;
+                td_cpf.textContent = data[i].cpf;
+                td_logradouro.textContent = data[i].logradouro;
+                td_cidade.textContent = data[i].cidade;
+                td_acoes.appendChild(ancorDel);
+                td_acoes.appendChild(ancorEdit);
+                
+            }
+            document.querySelector('#cont').textContent = `Resultados: ${(data[(data.length-1)].total)}`;
+
+            let ul = document.querySelector('#ulPaginado');
+            ul.textContent = '';
+
+            console.log(data[(data.length-1)].total);
+            let paginas = paginar(data[(data.length-1)].total);
+            let url;
+            for(let i = 0;i<paginas;i++){
+
+                url = `processing.php?acao=buscarClientePaginado&buscar=${busca}&offset=${(i*5)}`;
+
+                let Ancor = document.createElement('a');
+                Ancor.classList.add('page-link');
+                Ancor.setAttribute("onclick","buscarClientePaginado(\""+url+"\")");
+                Ancor.href ='#';
+                Ancor.textContent = (i+1); 
+                let li = document.createElement('li');
+                li.classList.add('page-item');
+                li.appendChild(Ancor);
+                ul.appendChild(li);
+
+            }
+        })
+    })
 }

@@ -12,7 +12,9 @@ session_start();
     <title>Login</title>
 </head>
 <body>
-
+    <header>
+        <h1>Controle de Clientes Academia Body in Shap</h1>
+    </header>
     <div class="container">
         <form action="logar.php" id="form" method="post">
             <h2>LOGIN</h2>
