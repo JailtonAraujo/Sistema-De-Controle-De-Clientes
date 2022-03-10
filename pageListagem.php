@@ -25,7 +25,7 @@ if(!$_SESSION['usuario']){
 
   <div class="container">
     
-  <?php  include 'header.php'?>
+  <?php  include 'header.php';?>
 
     <div class="main">
       <H2>LISTAGE DE CLIENTES</H2>
@@ -61,6 +61,7 @@ if(!$_SESSION['usuario']){
           </nav>
 
         </div>
+        
       </div>
     </div>
   </div>

@@ -24,9 +24,7 @@ if(!$_SESSION['usuario']){
 
   <div class="container">
 
-    <?php  include 'header.php';
-           include 'processing.php';
-    ?>
+    <?php  include 'header.php';?>
     <div class="main">
       <h2>CADASTRO DE CLIENTES</h2>
 
@@ -38,7 +36,7 @@ if(!$_SESSION['usuario']){
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">ID:</span>
                 <input type="text" name="id" class="form-control" id="id" aria-label="Username"
-                  aria-describedby="basic-addon1" value="<?= $id?>" readonly>
+                  aria-describedby="basic-addon1" value="<?php if(isset($_SESSION['id'])){echo $_SESSION['id'];}?>" readonly>
                 <div class="invalid-feedback">
                   Campo Obrigatorio!!
                 </div>
@@ -49,7 +47,7 @@ if(!$_SESSION['usuario']){
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">NOME:</span>
                 <input type="text" name="nome" class="form-control" id="nome" aria-label="Username"
-                  aria-describedby="basic-addon1" required>
+                  aria-describedby="basic-addon1" required value="<?php if(isset($_SESSION['cpf'])){echo $_SESSION['nome'];}?>">
                 <div class="invalid-feedback">
                   Campo Obrigatorio!!
                 </div>
@@ -60,7 +58,7 @@ if(!$_SESSION['usuario']){
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">CPF:</span>
                 <input type="number" name="cpf" id="cpf" class="form-control" aria-label="Username"
-                  aria-describedby="basic-addon1" required>
+                  aria-describedby="basic-addon1" required value="<?php if(isset($_SESSION['cpf'])){echo $_SESSION['cpf'];}?>">
                 <div class="invalid-feedback">
                   Campo Obrigatorio!!
                 </div>
@@ -71,7 +69,7 @@ if(!$_SESSION['usuario']){
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">RG:</span>
                 <input type="text" name="rg" id="rg" class="form-control" aria-label="Username"
-                  aria-describedby="basic-addon1" required>
+                  aria-describedby="basic-addon1" required value="<?php if(isset($_SESSION['rg'])){echo $_SESSION['rg'];}?>">
                 <div class="invalid-feedback">
                   Campo Obrigatorio!!
                 </div>
@@ -82,7 +80,7 @@ if(!$_SESSION['usuario']){
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">IDADE:</span>
                 <input type="date" name="data-nascimento" id="data-nascimento" class="form-control" aria-label="Username"
-                  aria-describedby="basic-addon1" required>
+                  aria-describedby="basic-addon1" required value="<?php if(isset($_SESSION['dataNascimento'])){echo $_SESSION['dataNascimento'];}?>">
                 <div class="invalid-feedback">
                   Campo Obrigatorio!!
                 </div>
@@ -95,14 +93,29 @@ if(!$_SESSION['usuario']){
                 <button type="button" class="btn btn-secondary" id="btn-limpar"
                   onclick="limparCampos();">LIMPAR</button>
               </div>
+
+              <div id="resposta" style="color: red; margin-top: 8px;">
+                <?php if(isset($_SESSION['msg'])){ echo $_SESSION['msg']; } ?>
+              </div>
             </div>
 
             <div class="endereco">
               <legend>Endereço</legend>
               <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">ID:</span>
+                <input type="text" name="idEndereco" class="form-control" id="idEndereco" aria-label="Username"
+                  aria-describedby="basic-addon1" value="<?php if(isset($_SESSION['idEndereco'])){echo $_SESSION['idEndereco'];}?>" readonly>
+                <div class="invalid-feedback">
+                  Campo Obrigatorio!!
+                </div>
+                <div class="valid-feedback">
+                  Ok
+                </div>
+              </div>
+              <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">CEP:</span>
                 <input type="number" name="cep" class="form-control" id="cep" aria-label="Username"
-                  aria-describedby="basic-addon1" required onblur="BuscarEndereco();">
+                  aria-describedby="basic-addon1" required onblur="BuscarEndereco();" value="<?php if(isset($_SESSION['cep'])){echo $_SESSION['cep'];}?>">
                 <div class="invalid-feedback">
                   Campo Obrigatorio!!
                 </div>
@@ -114,7 +127,7 @@ if(!$_SESSION['usuario']){
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">LOGRADOURO:</span>
                 <input type="text" name="logradouro" id="logradouro" class="form-control" aria-label="Username"
-                  aria-describedby="basic-addon1" required>
+                  aria-describedby="basic-addon1" required value="<?php if(isset($_SESSION['logradouro'])){echo $_SESSION['logradouro'];}?>">
                 <div class="invalid-feedback">
                   Campo Obrigatorio!!
                 </div>
@@ -125,7 +138,7 @@ if(!$_SESSION['usuario']){
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">COMPLEMENTO:</span>
                 <input type="text" name="complemento" id="complemento" class="form-control" aria-label="Username"
-                  aria-describedby="basic-addon1" required>
+                  aria-describedby="basic-addon1" required value="<?php if(isset($_SESSION['complemento'])){echo $_SESSION['complemento'];}?>">
                 <div class="invalid-feedback">
                   Campo Obrigatorio!!
                 </div>
@@ -136,7 +149,7 @@ if(!$_SESSION['usuario']){
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">BAIRRO:</span>
                 <input type="text" name="bairro" id="bairro" class="form-control" aria-label="Username"
-                  aria-describedby="basic-addon1" required>
+                  aria-describedby="basic-addon1" required value="<?php if(isset($_SESSION['bairro'])){echo $_SESSION['bairro'];}?>">
                 <div class="invalid-feedback">
                   Campo Obrigatorio!!
                 </div>
@@ -147,7 +160,7 @@ if(!$_SESSION['usuario']){
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">CIDADE:</span>
                 <input type="text" name="cidade" id="cidade" class="form-control" aria-label="Username"
-                  aria-describedby="basic-addon1" required readonly>
+                  aria-describedby="basic-addon1" required readonly value="<?php if(isset($_SESSION['cidade'])){echo $_SESSION['cidade'];}?>">
                 <div class="invalid-feedback">
                   Campo Obrigatorio!!
                 </div>
@@ -158,7 +171,7 @@ if(!$_SESSION['usuario']){
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">NUMERO:</span>
                 <input type="number" name="numero" id="numero" class="form-control" aria-label="Username"
-                  aria-describedby="basic-addon1" required>
+                  aria-describedby="basic-addon1" required value="<?php if(isset($_SESSION['numero'])){echo $_SESSION['numero'];}?>">
                 <div class="invalid-feedback">
                   Campo Obrigatorio!!
                 </div>
@@ -169,7 +182,7 @@ if(!$_SESSION['usuario']){
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">UF:</span>
                 <input type="text" name="uf" id="uf" class="form-control" aria-label="Username"
-                  aria-describedby="basic-addon1" required readonly>
+                  aria-describedby="basic-addon1" required readonly value="<?php if(isset($_SESSION['uf'])){echo $_SESSION['uf'];}?>">
                 <div class="invalid-feedback">
                   Campo Obrigatorio!!
                 </div>
@@ -178,7 +191,6 @@ if(!$_SESSION['usuario']){
                 </div>
               </div>
 
-              <div id="resposta" style="color: red; margin-top: 8px;"></div>
             </div>
           </form>
 
