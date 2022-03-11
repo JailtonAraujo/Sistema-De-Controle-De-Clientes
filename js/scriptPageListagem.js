@@ -11,76 +11,9 @@ btnBuscar.addEventListener('click',e=>{
 
     let busca = document.querySelector('#txt-busca').value;
 
-    const options ={
-        method:'GET',
-        Headers:{"Content-Type":'application/json'},
-    }
+    const url = `processing.php?acao=buscarClientePaginado&buscar=${busca}`;
 
-    fetch(`processing.php?acao=buscarFetch&buscar=${busca}`,options)
-    .then(response =>{response.json()
-        .then(function(data){
-            let tbody = document.querySelector('#tbody');
-            tbody.textContent = '';
-
-            for(let i = 0;i<(data.length-1);i++){
-                let tr = tbody.insertRow();
-
-                let td_id = tr.insertCell();
-                let td_nome = tr.insertCell();
-                let td_cpf = tr.insertCell();
-                let td_logradouro = tr.insertCell();
-                let td_cidade = tr.insertCell();
-                let td_acoes = tr.insertCell();
-
-                let imgDel = document.createElement('img');
-                imgDel.src = 'img/lixeira.png';
-                let ancorDel = document.createElement('a');
-                ancorDel.href = `processing.php?acao=delCliente&id=${data[i].idCliente}`;
-                ancorDel.style = 'margin-right: 3px;';
-                ancorDel.appendChild(imgDel);
-
-                let imgEdit = document.createElement('img');
-                imgEdit.src = 'img/lapis.png';
-                let ancorEdit = document.createElement('a');
-                ancorEdit.href = `processing.php?acao=buscarClienteId&id=${data[i].idCliente}`;
-                ancorEdit.appendChild(imgEdit);
-
-                td_id.textContent = data[i].idCliente;
-                td_nome.textContent = data[i].nome;
-                td_cpf.textContent = data[i].cpf;
-                td_logradouro.textContent = data[i].logradouro;
-                td_cidade.textContent = data[i].cidade;
-                td_acoes.appendChild(ancorDel);
-                td_acoes.appendChild(ancorEdit);
-                
-            }
-            document.querySelector('#cont').textContent = `Resultados: ${(data[(data.length-1)].total)}`;
-
-            let ul = document.querySelector('#ulPaginado');
-            ul.textContent = '';
-
-            console.log(data[(data.length-1)].total);
-            let paginas = paginar(data[(data.length-1)].total);
-            console.log(paginas);
-            let url;
-            for(let i = 0;i<paginas;i++){
-
-                url = `processing.php?acao=buscarClientePaginado&buscar=${busca}&offset=${(i*5)}`;
-
-                let Ancor = document.createElement('a');
-                Ancor.classList.add('page-link');
-                Ancor.setAttribute("onclick","buscarClientePaginado(\""+url+"\")");
-                Ancor.href ='#';
-                Ancor.textContent = (i+1); 
-                let li = document.createElement('li');
-                li.classList.add('page-item');
-                li.appendChild(Ancor);
-                ul.appendChild(li);
-
-            }
-        })
-    })
-
+    buscarClientePaginado(url);
 })
 
 function paginar(total){
@@ -110,7 +43,10 @@ function buscarClientePaginado(url){
             let tbody = document.querySelector('#tbody');
             tbody.textContent = '';
 
-            console.log(data);
+            /*OBS! O JSON DE RESPOSTA DO SERVIDO VEM COM 5 ELEMENTOS CLIENTES E UM ELEMENTO CHAMADO TOTAL QUE CORRESPONDE AO COUNT()
+              DE REGISTROS NO BD, ENTÃO, O JASON TERÁ AO TODO 6 ELEMENTOS POR ESSE MOTIVO, NOS LOOPS, O DATA, JSON DE RESPOSTA, NÃO VAI SER PERRCORRIDO
+              ATE A ULTIMA POSIÇÃO POIS A MESMO CORRESPONDE AO TOTAL DE RESGISTROS, MAS SIM DA POSIÇÃO 0 ATÉ A POSIÇÃO (DATA.LENGTH - 1).*/
+
             for(let i = 0;i<(data.length-1);i++){
                 let tr = tbody.insertRow();
 
@@ -124,7 +60,7 @@ function buscarClientePaginado(url){
                 let imgDel = document.createElement('img');
                 imgDel.src = 'img/lixeira.png';
                 let ancorDel = document.createElement('a');
-                ancorDel.href = `processing.php?acao=delCliente&id=${data[i].idCliente}`;
+                ancorDel.href = `processing.php?acao=excluir&id=${data[i].idCliente}`;
                 ancorDel.style = 'margin-right: 3px;';
                 ancorDel.appendChild(imgDel);
 
@@ -143,12 +79,11 @@ function buscarClientePaginado(url){
                 td_acoes.appendChild(ancorEdit);
                 
             }
-            document.querySelector('#cont').textContent = `Resultados: ${(data[(data.length-1)].total)}`;
+            document.querySelector('#cont').textContent = `Resultados: ${(data.length-1)}`;
 
             let ul = document.querySelector('#ulPaginado');
             ul.textContent = '';
 
-            console.log(data[(data.length-1)].total);
             let paginas = paginar(data[(data.length-1)].total);
             let url;
             for(let i = 0;i<paginas;i++){

@@ -13,7 +13,7 @@ session_start();
 </head>
 <body>
     <header>
-        <h1>Controle de Clientes Academia Body in Shap</h1>
+        <h1>Controle de Clientes Academia Body in Shape</h1>
     </header>
     <div class="container">
         <form action="logar.php" id="form" method="post">

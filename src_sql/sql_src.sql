@@ -40,15 +40,9 @@ create table if not exists `endereco`(
     constraint fk_endereco_cliente foreign key (idCliente) references cliente(idCliente)  
 )engine = InnoDB default character set = utf8;
 
--- QUERY DE INSERT NO BANCO --
+-- QUERY DE INSERT USUARIO NO BANCO --
 insert into usuario (login, senha) values ('?', '?');
 
---  QUERY DE CONSULTA NO BANCO --
-select * from usuario;
 
--- QUERY DE LOGIN --
-select login, idusuario from usuario where senha = '?' and login = '?';
 
--- QUERY DE DELETE --
-delete from usuario where idusuario = ?;
 

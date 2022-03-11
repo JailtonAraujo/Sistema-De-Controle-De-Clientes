@@ -25,7 +25,7 @@ if(!$_SESSION['usuario']){
 
   <div class="container">
     
-  <?php  include 'header.php'?>
+  <?php  include 'header.php';?>
 
     <div class="main">
       <H2>LISTAGE DE CLIENTES</H2>
@@ -61,13 +61,13 @@ if(!$_SESSION['usuario']){
           </nav>
 
         </div>
+        
       </div>
     </div>
   </div>
 
   <footer>
-    &copy; copyrigth Sistema php
-    <?php print date('Y')?>
+    &copy; copyrigth Sistema php <?php print date('Y')?> By Jailton de Araujo & Rudney Silva
   </footer>
 
   <script src="js/scriptPageListagem.js"></script>

@@ -1,17 +1,3 @@
-
-/*
-document.querySelector('#form-cadastro').addEventListener('submit', (e)=>{
-
-    ///e.preventDefault();
-
-if(null){
-}else{
-    document.querySelector('#resposta').textContent = "Os campos não foram devidamente preenchidos";
-}
-
-});
-*/
-
 function BuscarEndereco(){
     let cep = document.querySelector('#cep').value;
 

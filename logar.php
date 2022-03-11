@@ -7,8 +7,6 @@ if(empty($_POST["login"]) || empty($_POST["senha"])){
     exit();
 }
 
-
-
 $usuario = mysqli_real_escape_string($conexao, $_POST["login"]);
 $senha = mysqli_real_escape_string($conexao, $_POST["senha"]);
 
