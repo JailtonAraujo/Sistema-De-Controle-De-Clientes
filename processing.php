@@ -46,6 +46,7 @@ try{
     mysqli_query($conexao, $queryCliente);
 
     $queryEndereco = "update endereco set cep = '$cep', logradouro= '$logradouro', complemento= '$complemento', bairro= '$bairro', cidade= '$cidade', numero= '$numero', uf= '$uf' where idEndereco = '$idEndereco'";
+
     mysqli_query($conexao, $queryEndereco);
 
     $_SESSION['msg'] = "Atualizado com sucesso!";

@@ -83,7 +83,7 @@ function buscarClientePaginado(url){
 
             let ul = document.querySelector('#ulPaginado');
             ul.textContent = '';
-
+            
             let paginas = paginar(data[(data.length-1)].total);
             let url;
             for(let i = 0;i<paginas;i++){
