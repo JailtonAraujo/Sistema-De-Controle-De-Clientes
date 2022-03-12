@@ -45,6 +45,8 @@ create table if not exists `endereco`(
 -- QUERY DE INSERT USUARIO NO BANCO --
 insert into usuario (login, senha) values ('?', '?');
 
-
-
+-- INSERT CLIENTE E ENDERECO
+insert into cliente (nome, cpf, rg, dataNascimento) values ('fulano', 45465, 465465, '2022-03-12');
+insert into endereco (idCliente, cep, logradouro, complemento, bairro, cidade, numero, uf)
+     values (last_insert_id(), 01153000, 'Rua Vitorino Carmilo', 'Acolá', 'Barra Funda', 'São Paulo', '32', 'SP');
 
