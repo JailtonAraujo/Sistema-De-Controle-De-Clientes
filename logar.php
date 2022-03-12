@@ -3,6 +3,7 @@ session_start();
 include 'connection.php';
 
 if(empty($_POST["login"]) || empty($_POST["senha"])){
+    $_SESSION['error'] = "Login ou senha incorretos!";
     header('Location: index.php');
     exit();
 }
@@ -25,7 +26,7 @@ if($row == 1){
     exit();
 }else{
 
-    $_SESSION['nao-autenticado'] = true;
+    $_SESSION['error'] = "Login ou senha incorretos!";
     header('Location: index.php');
     exit();
 }

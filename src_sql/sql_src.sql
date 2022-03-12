@@ -37,7 +37,9 @@ create table if not exists `endereco`(
     numero int not null,
     uf varchar(3) not null,
     primary key (idEndereco),
-    constraint fk_endereco_cliente foreign key (idCliente) references cliente(idCliente)  
+    constraint fk_endereco_cliente foreign key (idCliente) references cliente(idCliente)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE 
 )engine = InnoDB default character set = utf8;
 
 -- QUERY DE INSERT USUARIO NO BANCO --

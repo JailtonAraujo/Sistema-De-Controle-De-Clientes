@@ -36,9 +36,9 @@ session_start();
 
 
             <?php 
-                if(isset($_SESSION['nao-autenticado'])):
+                if(isset($_SESSION['error'])):
             ?>
-                <p id = "msg-alert">Login ou senha incorretos, confira-os!</p>
+                <p id = "msg-alert"> <?php echo $_SESSION['error']; ?> </p>
             <?php
                 endif;
             ?>

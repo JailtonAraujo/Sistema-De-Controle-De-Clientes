@@ -1,6 +1,7 @@
 <?php
 session_start();
 if(!$_SESSION['usuario']){
+  $_SESSION['error'] = "Por favor, fazer login!";
     header('Location:index.php');
     exit();
 }
