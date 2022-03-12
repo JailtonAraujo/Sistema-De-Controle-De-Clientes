@@ -119,8 +119,12 @@ else if($acao==='buscarClientePaginado'){
 
         try{
 
+        $sql = "delete from cliente where idCliente = $id";
+
         mysqli_query($conexao, $sql);
-        mysqli_commit($conexao);   
+        mysqli_commit($conexao);  
+        
+        echo json_encode("Excluido com sucesso!");
 
         }catch(Exception $e){
             echo $e;
@@ -128,8 +132,7 @@ else if($acao==='buscarClientePaginado'){
         }finally{
             mysqli_close($conexao);
         }
-        //echo '<div class="alert alert-success" role="alert"> EXCLUIDO COM SUCESSO! </div>';
-        header('Location:pageListagem.php');
+
     }
 
     else if ($acao === "buscarClienteId"){
@@ -144,8 +147,6 @@ else if($acao==='buscarClientePaginado'){
 
     $result = mysqli_query($conexao, $sql);
     $row = mysqli_fetch_assoc($result);
-
-    //echo  $row["idCliente"]
 
         $_SESSION['id']=$row['idCliente'];;
         $_SESSION['idEndereco'] = $row['idEndereco'];

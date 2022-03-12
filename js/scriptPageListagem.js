@@ -4,17 +4,13 @@ const ancorModific = document.querySelector('#ancor-modific');
 ancorModific.href = 'pageCadastro.php';
 btnReturnHomePage.textContent = 'CADASTRAR CLIENTE';
 
-const btnBuscar = document.querySelector('#btn-busca');
-
-btnBuscar.addEventListener('click',e=>{
-    e.preventDefault();
-
+function buscarCliente(){
     let busca = document.querySelector('#txt-busca').value;
 
     const url = `processing.php?acao=buscarClientePaginado&buscar=${busca}`;
 
     buscarClientePaginado(url);
-})
+}
 
 function paginar(total){
     
@@ -60,7 +56,9 @@ function buscarClientePaginado(url){
                 let imgDel = document.createElement('img');
                 imgDel.src = 'img/lixeira.png';
                 let ancorDel = document.createElement('a');
-                ancorDel.href = `processing.php?acao=excluir&id=${data[i].idCliente}`;
+                ancorDel.href = '#';
+                let url = `processing.php?acao=excluir&id=${data[i].idCliente}`;
+                ancorDel.setAttribute("onclick","excluirCliente(\""+url+"\");");
                 ancorDel.style = 'margin-right: 3px;';
                 ancorDel.appendChild(imgDel);
 
@@ -103,4 +101,25 @@ function buscarClientePaginado(url){
             }
         })
     })
+}
+
+function excluirCliente(url){
+
+    if(confirm("Tem certeza que deseja excluir esse cliente?")){
+
+    const options = {
+        method: 'GET',
+        Headers:{"Content-Type":'application/json'},
+    }
+
+    fetch(url, options)
+    .then(response => {response.json()
+        .then(function(data){
+            document.querySelector('#msg').textContent = data;
+            buscarCliente();
+        })
+    }).catch(error =>{
+        document.querySelector('#msg').textContent = error;
+    })
+}
 }

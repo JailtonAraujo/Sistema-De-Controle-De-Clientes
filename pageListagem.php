@@ -33,7 +33,7 @@ if(!$_SESSION['usuario']){
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="NOME" aria-label="Recipient's username"
             aria-describedby="button-addon2" id="txt-busca">
-          <button class="btn btn-primary" type="button" id="btn-busca">BUSCAR</button>
+          <button class="btn btn-primary" type="button" id="btn-busca" onclick="buscarCliente();">BUSCAR</button>
         </div>
         <div class="tblresults" style="height: 70%; overflow:scroll;">
           <table class="table table-striped" id="tblResults">
@@ -61,7 +61,7 @@ if(!$_SESSION['usuario']){
           </nav>
 
         </div>
-        
+        <span id="msg" style="color: red;"></span>
       </div>
     </div>
   </div>
